@@ -1,4 +1,4 @@
-package jp_dimension_parser
+package dimparser
 
 import (
 	"strings"

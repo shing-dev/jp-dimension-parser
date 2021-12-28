@@ -1,4 +1,4 @@
-package jp_dimension_parser
+package dimparser
 
 // Length represents the length of a thing
 type Length int64
