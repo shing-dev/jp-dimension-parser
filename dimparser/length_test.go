@@ -2,7 +2,7 @@ package dimparser
 
 import "testing"
 
-func TestLength_Millimeter(t *testing.T) {
+func TestLength_Millimeters(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
@@ -23,14 +23,14 @@ func TestLength_Millimeter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.l.Millimeter(); got != tt.want {
-				t.Errorf("Millimeter() = %v, want %v", got, tt.want)
+			if got := tt.l.Millimeters(); got != tt.want {
+				t.Errorf("Millimeters() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestLength_Centimeter(t *testing.T) {
+func TestLength_Centimeters(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
@@ -51,14 +51,14 @@ func TestLength_Centimeter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.l.Centimeter(); got != tt.want {
-				t.Errorf("Centimeter() = %v, want %v", got, tt.want)
+			if got := tt.l.Centimeters(); got != tt.want {
+				t.Errorf("Centimeters() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestLength_Meter(t *testing.T) {
+func TestLength_Meters(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
@@ -84,14 +84,14 @@ func TestLength_Meter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.l.Meter(); got != tt.want {
-				t.Errorf("Meter() = %v, want %v", got, tt.want)
+			if got := tt.l.Meters(); got != tt.want {
+				t.Errorf("Meters() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestLength_KiloMeter(t *testing.T) {
+func TestLength_KiloMeters(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
@@ -112,8 +112,8 @@ func TestLength_KiloMeter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.l.KiloMeter(); got != tt.want {
-				t.Errorf("KiloMeter() = %v, want %v", got, tt.want)
+			if got := tt.l.Kilometers(); got != tt.want {
+				t.Errorf("Kilometers() = %v, want %v", got, tt.want)
 			}
 		})
 	}
