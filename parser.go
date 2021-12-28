@@ -4,14 +4,9 @@ import (
 	"fmt"
 	"regexp"
 	"strconv"
-	"strings"
-
-	"golang.org/x/text/unicode/norm"
 )
 
 var numRegex = regexp.MustCompile(`[0-9]+`)
-
-var confusingWords = []string{"座面高さ"}
 
 // Dimension represents the object's width x depth x height
 type Dimension struct {
@@ -23,10 +18,7 @@ type Dimension struct {
 // Parse returns parsed dimension
 // When none of the lengths are parsed, it returns nil
 func Parse(s string) *Dimension {
-	s = string(norm.NFKC.Bytes([]byte(s)))
-	for _, w := range confusingWords {
-		s = strings.ReplaceAll(s, w, "#")
-	}
+	s = analyze(s)
 	dim := Dimension{
 		Width:  parseWidth(s),
 		Depth:  parseDepth(s),
