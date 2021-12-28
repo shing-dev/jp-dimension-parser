@@ -72,9 +72,9 @@ func parseDimension(dimensionName string, s string) Length {
 	}
 	for _, lf := range lengthFormats {
 		ranges := []string{
-			fmt.Sprintf(`([0-9]*[.])?[0-9]+%s`, lf.format),
-			fmt.Sprintf(`([0-9]*[.])?[0-9]+〜[0-9]+%s`, lf.format),
-			fmt.Sprintf(`([0-9]*[.])?[0-9]+~[0-9]+%s`, lf.format),
+			fmt.Sprintf(`([ :]*)?([0-9]*[.])?[0-9]+([ ]*)?%s`, lf.format),
+			fmt.Sprintf(`([ :]*)?([0-9]*[.])?[0-9]+〜[0-9]+([ ]*)?%s`, lf.format),
+			fmt.Sprintf(`([ :]*)?([0-9]*[.])?[0-9]+~[0-9]+([ ]*)?%s`, lf.format),
 		}
 		for _, r := range ranges {
 			re := regexp.MustCompile(dimensionName + r)

@@ -29,11 +29,11 @@ func TestParse(t *testing.T) {
 			},
 		},
 		{
-			s: "幅11mm 奥25mm 高209mm",
+			s: "幅 12.2cm×奥行　1.5 m×高さ: 18.9cm",
 			want: &Dimension{
-				Width:  Length(11),
-				Depth:  Length(25),
-				Height: Length(209),
+				Width:  Length(122),
+				Depth:  Length(1500),
+				Height: Length(189),
 			},
 		},
 		{

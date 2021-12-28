@@ -12,8 +12,8 @@ func Test_analyze(t *testing.T) {
 	}{
 		{
 			name: "normalize full-width character",
-			s:    "１２３",
-			want: "123",
+			s:    "１２　3",
+			want: "12 3",
 		},
 		{
 			name: "replace misleading words",
