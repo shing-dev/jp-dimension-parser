@@ -1,5 +1,6 @@
 package jp_dimension_parser
 
+// Length represents the length of a thing
 type Length int64
 
 const (
@@ -30,4 +31,3 @@ func (l Length) KiloMeter() float64 {
 	mm := l % KiloMeter
 	return float64(cm) + float64(mm)/1e6
 }
-
