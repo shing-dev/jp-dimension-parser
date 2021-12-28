@@ -9,7 +9,6 @@ func TestParse(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		name string
 		s    string
 		want *Dimension
 	}{
@@ -19,6 +18,14 @@ func TestParse(t *testing.T) {
 				Width:  Length(62) * Centimeter,
 				Depth:  Length(73) * Centimeter,
 				Height: Length(189) * Centimeter,
+			},
+		},
+		{
+			s: "幅12.2cm×奥行1.5m×高さ18.9cm",
+			want: &Dimension{
+				Width:  Length(122),
+				Depth:  Length(1500),
+				Height: Length(189),
 			},
 		},
 		{
@@ -75,7 +82,7 @@ func TestParse(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.s, func(t *testing.T) {
 			got := Parse(tt.s)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Parse() got = %v, want %v", got, tt.want)

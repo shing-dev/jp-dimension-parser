@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-var numRegex = regexp.MustCompile(`[0-9]+`)
+var floatNumRegex = regexp.MustCompile(`([0-9]*[.])?[0-9]+`)
 
 // Dimension represents the object's width x depth x height
 type Dimension struct {
@@ -72,16 +72,16 @@ func parseDimension(dimensionName string, s string) Length {
 	}
 	for _, lf := range lengthFormats {
 		ranges := []string{
-			fmt.Sprintf(`[0-9]+%s`, lf.format),
-			fmt.Sprintf(`[0-9]+〜[0-9]+%s`, lf.format),
-			fmt.Sprintf(`[0-9]+~[0-9]+%s`, lf.format),
+			fmt.Sprintf(`([0-9]*[.])?[0-9]+%s`, lf.format),
+			fmt.Sprintf(`([0-9]*[.])?[0-9]+〜[0-9]+%s`, lf.format),
+			fmt.Sprintf(`([0-9]*[.])?[0-9]+~[0-9]+%s`, lf.format),
 		}
 		for _, r := range ranges {
 			re := regexp.MustCompile(dimensionName + r)
 			subMatch := re.FindStringSubmatch(s)
 			if len(subMatch) > 0 {
-				l, _ := strconv.Atoi(numRegex.FindStringSubmatch(subMatch[0])[0])
-				return Length(l) * lf.length
+				l, _ := strconv.ParseFloat(floatNumRegex.FindStringSubmatch(subMatch[0])[0], 64)
+				return Length(l * float64(lf.length))
 			}
 		}
 	}
