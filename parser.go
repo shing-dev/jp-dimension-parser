@@ -13,14 +13,16 @@ var numRegex = regexp.MustCompile(`[0-9]+`)
 
 var confusingWords = []string{"座面高さ"}
 
+// Dimension represents the object's width x depth x height
 type Dimension struct {
 	Width  Length
 	Depth  Length
 	Height Length
 }
 
-// Parse returns parsed dimension and whether dimension exists or not
-func Parse(s string) (*Dimension, bool) {
+// Parse returns parsed dimension
+// When none of the lengths are parsed, it returns nil
+func Parse(s string) *Dimension {
 	s = string(norm.NFKC.Bytes([]byte(s)))
 	for _, w := range confusingWords {
 		s = strings.ReplaceAll(s, w, "#")
@@ -31,9 +33,9 @@ func Parse(s string) (*Dimension, bool) {
 		Height: parseHeight(s),
 	}
 	if dim.Width > 0 || dim.Depth > 0 || dim.Height > 0 {
-		return &dim, true
+		return &dim
 	}
-	return nil, false
+	return nil
 }
 
 func parseWidth(s string) Length {
