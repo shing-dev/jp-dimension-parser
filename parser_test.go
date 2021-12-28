@@ -42,11 +42,27 @@ func TestParse(t *testing.T) {
 			want1: true,
 		},
 		{
+			s: "幅11~12cm",
+			want: &Dimension{
+				Width: Length(11) * Centimeter,
+			},
+			want1: true,
+		},
+		{
 			s: "W11m×D24m×H99m",
 			want: &Dimension{
 				Width:  Length(11) * Meter,
 				Depth:  Length(24) * Meter,
 				Height: Length(99) * Meter,
+			},
+			want1: true,
+		},
+		{
+			s: "W９９mm×D８7cm×H6４m",
+			want: &Dimension{
+				Width:  Length(99) * Millimeter,
+				Depth:  Length(87) * Centimeter,
+				Height: Length(64) * Meter,
 			},
 			want1: true,
 		},

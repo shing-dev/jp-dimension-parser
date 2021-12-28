@@ -5,6 +5,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"golang.org/x/text/unicode/norm"
 )
 
 var numRegex = regexp.MustCompile(`[0-9]+`)
@@ -19,6 +21,7 @@ type Dimension struct {
 
 // Parse returns parsed dimension and whether dimension exists or not
 func Parse(s string) (*Dimension, bool) {
+	s = string(norm.NFKC.Bytes([]byte(s)))
 	for _, w := range confusingWords {
 		s = strings.ReplaceAll(s, w, "#")
 	}
@@ -65,18 +68,19 @@ func parseHeight(s string) Length {
 }
 
 func parseDimension(dimensionName string, s string) Length {
-	lengthFormats := []struct{
+	lengthFormats := []struct {
 		format string
 		length Length
 	}{
 		{format: "mm", length: Millimeter},
-		{ format: "cm", length: Centimeter},
-		{ format: "m", length: Meter},
+		{format: "cm", length: Centimeter},
+		{format: "m", length: Meter},
 	}
 	for _, lf := range lengthFormats {
 		ranges := []string{
 			fmt.Sprintf(`[0-9]+%s`, lf.format),
 			fmt.Sprintf(`[0-9]+〜[0-9]+%s`, lf.format),
+			fmt.Sprintf(`[0-9]+~[0-9]+%s`, lf.format),
 		}
 		for _, r := range ranges {
 			re := regexp.MustCompile(dimensionName + r)
