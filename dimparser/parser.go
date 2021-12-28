@@ -41,7 +41,7 @@ func parseWidth(s string) Length {
 }
 
 func parseDepth(s string) Length {
-	depths := []string{"奥行き", "奥行", "depth", "D", "d"}
+	depths := []string{"奥行き", "奥行", "奥", "depth", "D", "d"}
 	for _, d := range depths {
 		if length := parseDimension(d, s); length > 0 {
 			return length

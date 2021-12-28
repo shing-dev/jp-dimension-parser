@@ -29,7 +29,7 @@ func TestParse(t *testing.T) {
 			},
 		},
 		{
-			s: "幅11mm 奥行き25mm 高209mm",
+			s: "幅11mm 奥25mm 高209mm",
 			want: &Dimension{
 				Width:  Length(11),
 				Depth:  Length(25),
