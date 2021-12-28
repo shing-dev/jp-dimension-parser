@@ -72,12 +72,12 @@ func parseDimension(dimensionName string, s string) Length {
 	}
 	for _, lf := range lengthFormats {
 		ranges := []string{
-			fmt.Sprintf(`([ :]*)?([0-9]*[.])?[0-9]+([ ]*)?%s`, lf.format),
-			fmt.Sprintf(`([ :]*)?([0-9]*[.])?[0-9]+〜[0-9]+([ ]*)?%s`, lf.format),
-			fmt.Sprintf(`([ :]*)?([0-9]*[.])?[0-9]+~[0-9]+([ ]*)?%s`, lf.format),
+			fmt.Sprintf(`([0-9]*[.])?[0-9]+([ ]*)?%s`, lf.format),
+			fmt.Sprintf(`([0-9]*[.])?[0-9]+〜[0-9]+([ ]*)?%s`, lf.format),
+			fmt.Sprintf(`([0-9]*[.])?[0-9]+~[0-9]+([ ]*)?%s`, lf.format),
 		}
 		for _, r := range ranges {
-			re := regexp.MustCompile(dimensionName + r)
+			re := regexp.MustCompile(dimensionName + "([ :]*)?" + r)
 			subMatch := re.FindStringSubmatch(s)
 			if len(subMatch) > 0 {
 				l, _ := strconv.ParseFloat(floatNumRegex.FindStringSubmatch(subMatch[0])[0], 64)
