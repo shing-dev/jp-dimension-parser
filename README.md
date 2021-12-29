@@ -19,8 +19,8 @@ import (
 )
 
 func main() {
-    dimension, ok := dimparser.Parse("幅62cm×奥行73cm×高さ189cm")
-    if ok {
+    dimension := dimparser.Parse("幅62cm×奥行73cm×高さ189cm")
+    if dimension != nil {
         fmt.Println("width(cm):", dim.Width.Centimeter())
         fmt.Println("depth(cm):", dim.Depth.Centimeter())
         fmt.Println("height(cm):", dim.Height.Centimeter())
