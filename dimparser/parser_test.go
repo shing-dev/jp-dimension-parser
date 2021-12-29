@@ -29,9 +29,9 @@ func TestParse(t *testing.T) {
 			},
 		},
 		{
-			s: "幅 12.2cm×奥行　1.5 m×高さ: 18.9cm",
+			s: "幅 12cm×奥行　1.5 m×高さ: 18.9cm",
 			want: &Dimension{
-				Width:  Length(122),
+				Width:  Length(120),
 				Depth:  Length(1500),
 				Height: Length(189),
 			},
@@ -42,12 +42,6 @@ func TestParse(t *testing.T) {
 				Width:  Length(11),
 				Depth:  Length(25),
 				Height: Length(209),
-			},
-		},
-		{
-			s: "幅11~12cm",
-			want: &Dimension{
-				Width: Length(11) * Centimeter,
 			},
 		},
 		{
@@ -67,10 +61,54 @@ func TestParse(t *testing.T) {
 			},
 		},
 		{
+			s: "10×11×12cm",
+			want: &Dimension{
+				Width:  Length(10) * Centimeter,
+				Depth:  Length(11) * Centimeter,
+				Height: Length(12) * Centimeter,
+			},
+		},
+		{
+			s: "幅10×奥行11×高さ12cm",
+			want: &Dimension{
+				Width:  Length(10) * Centimeter,
+				Depth:  Length(11) * Centimeter,
+				Height: Length(12) * Centimeter,
+			},
+		},
+		{
+			s: "W10×D11×H12 (mm)",
+			want: &Dimension{
+				Width:  Length(10) * Millimeter,
+				Depth:  Length(11) * Millimeter,
+				Height: Length(12) * Millimeter,
+			},
+		},
+		{
+			s: "幅11~12cm",
+			want: &Dimension{
+				Width: Length(11) * Centimeter,
+			},
+		},
+		{
+			s: "幅11-12cm",
+			want: &Dimension{
+				Width: Length(11) * Centimeter,
+			},
+		},
+		{
 			s: "幅1cm",
 			want: &Dimension{
 				Width: Length(1) * Centimeter,
 			},
+		},
+		{
+			s:    "幅62×奥行73×高さ189",
+			want: nil,
+		},
+		{
+			s:    "幅62dm×奥行73am×高さ189pm",
+			want: nil,
 		},
 		{
 			s:    "座面高さ24cm",
