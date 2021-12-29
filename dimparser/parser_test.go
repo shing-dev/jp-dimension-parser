@@ -111,6 +111,10 @@ func TestParse(t *testing.T) {
 			want: nil,
 		},
 		{
+			s:    "床面までの高さ10cm",
+			want: nil,
+		},
+		{
 			s:    "座面高さ24cm",
 			want: nil,
 		},

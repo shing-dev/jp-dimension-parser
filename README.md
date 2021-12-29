@@ -4,6 +4,7 @@
 [![codecov](https://codecov.io/gh/k-yomo/jp-dimension-parser/branch/main/graph/badge.svg)](https://codecov.io/gh/k-yomo/jp-dimension-parser)
 [![Go Report Card](https://goreportcard.com/badge/github.com/k-yomo/jp-dimension-parser)](https://goreportcard.com/report/github.com/k-yomo/jp-dimension-parser)
 
+jp-dimension-parser is a simple parser useful for parsing dimension of a thing from unstructured text.
 
 ## Installation
 ```shell
@@ -30,3 +31,5 @@ func main() {
     }
 }
 ```
+
+More parsable formats are listed in the [test code](./dimparser/parser_test.go).

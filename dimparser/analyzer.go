@@ -6,7 +6,7 @@ import (
 	"golang.org/x/text/unicode/norm"
 )
 
-var misleadingWords = []string{"座面高さ"}
+var misleadingWords = []string{"の高さ", "座面高さ"}
 
 // analyze given string and returns cleaned string
 func analyze(s string) string {
