@@ -10,11 +10,11 @@ func TestParse(t *testing.T) {
 
 	tests := []struct {
 		s    string
-		want *Dimension
+		want *Dimensions
 	}{
 		{
 			s: "幅62cm×奥行73cm×高さ189cm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(62) * Centimeter,
 				Depth:  Length(73) * Centimeter,
 				Height: Length(189) * Centimeter,
@@ -22,7 +22,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "幅12.2cm×奥行1.5m×高さ18.9cm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(122),
 				Depth:  Length(1500),
 				Height: Length(189),
@@ -30,7 +30,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "幅 12cm×奥行　1.5 m×高さ: 18.9cm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(120),
 				Depth:  Length(1500),
 				Height: Length(189),
@@ -38,7 +38,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "幅11mm 奥行き25mm 高さ209〜250mm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(11),
 				Depth:  Length(25),
 				Height: Length(209),
@@ -46,7 +46,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "W11m×D24m×H99m",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(11) * Meter,
 				Depth:  Length(24) * Meter,
 				Height: Length(99) * Meter,
@@ -54,7 +54,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "W９９mm×D８7cm×H6４m",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(99) * Millimeter,
 				Depth:  Length(87) * Centimeter,
 				Height: Length(64) * Meter,
@@ -62,7 +62,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "10×11×12cm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(10) * Centimeter,
 				Depth:  Length(11) * Centimeter,
 				Height: Length(12) * Centimeter,
@@ -70,7 +70,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "幅10×奥行11×高さ12cm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(10) * Centimeter,
 				Depth:  Length(11) * Centimeter,
 				Height: Length(12) * Centimeter,
@@ -78,7 +78,7 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "W10×D11×H12 (mm)",
-			want: &Dimension{
+			want: &Dimensions{
 				Width:  Length(10) * Millimeter,
 				Depth:  Length(11) * Millimeter,
 				Height: Length(12) * Millimeter,
@@ -86,19 +86,19 @@ func TestParse(t *testing.T) {
 		},
 		{
 			s: "幅11~12cm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width: Length(11) * Centimeter,
 			},
 		},
 		{
 			s: "幅11-12cm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width: Length(11) * Centimeter,
 			},
 		},
 		{
 			s: "幅1cm",
-			want: &Dimension{
+			want: &Dimensions{
 				Width: Length(1) * Centimeter,
 			},
 		},

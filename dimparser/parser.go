@@ -24,25 +24,25 @@ var (
 
 var floatNumRegex = regexp.MustCompile(`([0-9]*[.])?[0-9]+`)
 
-// Dimension represents the object's width x depth x height
-type Dimension struct {
+// Dimensions represents the object's width x depth x height
+type Dimensions struct {
 	Width  Length
 	Depth  Length
 	Height Length
 }
 
-// Parse returns parsed dimension
+// Parse returns parsed dimensions
 // When none of the lengths are parsed, it returns nil
-func Parse(s string) *Dimension {
+func Parse(s string) *Dimensions {
 	s = analyze(s)
 
 	if dim := parseAllDimensions(s); dim != nil {
 		return dim
 	}
-	dim := Dimension{
-		Width:  parseWidth(s),
-		Depth:  parseDepth(s),
-		Height: parseHeight(s),
+	dim := Dimensions{
+		Width:  parseDimension(widthFormats, s),
+		Depth:  parseDimension(depthFormats, s),
+		Height: parseDimension(heightFormats, s),
 	}
 	if dim.Width > 0 || dim.Depth > 0 || dim.Height > 0 {
 		return &dim
@@ -50,29 +50,7 @@ func Parse(s string) *Dimension {
 	return nil
 }
 
-func parseWidth(s string) Length {
-	if length := parseDimension(widthFormats, s); length > 0 {
-		return length
-	}
-	return 0
-}
-
-func parseDepth(s string) Length {
-	if length := parseDimension(depthFormats, s); length > 0 {
-		return length
-	}
-	return 0
-}
-
-func parseHeight(s string) Length {
-	length := parseDimension(heightFormats, s)
-	if length > 0 {
-		return length
-	}
-	return 0
-}
-
-func parseAllDimensions(s string) *Dimension {
+func parseAllDimensions(s string) *Dimensions {
 	widthNameRegexOr := dimensionNamesToRegexOr(widthFormats)
 	depthNameRegexOr := dimensionNamesToRegexOr(depthFormats)
 	heightNameRegexOr := dimensionNamesToRegexOr(heightFormats)
@@ -91,7 +69,7 @@ func parseAllDimensions(s string) *Dimension {
 			w, _ := strconv.ParseFloat(lengthStrings[0][0], 64)
 			d, _ := strconv.ParseFloat(lengthStrings[1][0], 64)
 			h, _ := strconv.ParseFloat(lengthStrings[2][0], 64)
-			return &Dimension{
+			return &Dimensions{
 				Width:  Length(w * float64(lf.length)),
 				Depth:  Length(d * float64(lf.length)),
 				Height: Length(h * float64(lf.length)),
