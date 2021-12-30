@@ -20,11 +20,11 @@ import (
 )
 
 func main() {
-    dimension := dimparser.Parse("幅62cm×奥行73cm×高さ189cm")
-    if dimension != nil {
-        fmt.Println("width(cm):", dim.Width.Centimeter())
-        fmt.Println("depth(cm):", dim.Depth.Centimeter())
-        fmt.Println("height(cm):", dim.Height.Centimeter())
+    dimensions := dimparser.Parse("幅62cm×奥行73cm×高さ189cm")
+    if dimensions != nil {
+        fmt.Println("width(cm):", dimensions.Width.Centimeter())
+        fmt.Println("depth(cm):", dimensions.Depth.Centimeter())
+        fmt.Println("height(cm):", dimensions.Height.Centimeter())
         // => width(cm): 62 
         // => depth(cm): 73 
         // => height(cm): 189
